@@ -1,0 +1,2 @@
+server.port: ${itzy-micro-services.ports.core-route-service:0}
+spring.datasource.name: ${itzy-micro-services.database.core-route-service:sys}

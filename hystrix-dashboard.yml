@@ -1,0 +1,3 @@
+server.port: ${itzy-micro-services.ports.hystrix-dashboard:8080}
+#spring.datasource.name: ${sixi-micro-services.database.ali-account-service:sys}
+#SPRING_SESSION_STORE_TYPE: redis

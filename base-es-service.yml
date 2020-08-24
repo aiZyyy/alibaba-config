@@ -1,0 +1,8 @@
+server.port: ${itzy-micro-services.ports.base-es-service:8080}
+#spring.datasource.name: ${sixi-micro-services.database.ali-account-service:sys}
+#SPRING_SESSION_STORE_TYPE: redis
+
+# Elasticsearch配置
+elasticsearch:
+  hostname: 122.51.211.252
+  port: 9200

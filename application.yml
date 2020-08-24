@@ -1,0 +1,213 @@
+itzy-micro-services:
+  # 端口号
+  ports:
+    # 核心服务
+    api-gateway: 8080
+    eurceka-service: 8081
+    config-service: 8083
+    hystrix-dashboard: 8084
+    gateway-service: 8085
+    base-es-service: 8086
+    #路由服务
+    core-route-service: 8101
+    gateway-market-service: 8102
+
+    #demo
+    springcloud-demo: 9001
+  # 数据库
+  database:
+    core-route-service: core_route
+
+##############################
+# 以下为微服务公用配置 请勿修改
+##############################
+# 微服务基础配置
+itzy-micro-service:
+  local: localhost
+  hosts:
+    api-gateway: gateway
+    eureka-service: eureka
+    config-service: config
+  ports:
+    api-gateway: 8080
+    eureka-service: 8081
+    config-service: 8083
+  url: ${ITZY_MICRO_SERVICE_URL:http://${itzy-micro-service.hosts.api-gateway}:${itzy-micro-service.ports.api-gateway}}
+
+# 微服务公共配置
+#itzy-micro-service-security:
+#  browser:
+#    loginPage: ${itzy-micro-service-common.oauth.loginPage}
+#    qyWechatRedirectUri: ${itzy-micro-service-common.oauth.url}
+
+# 微服务第三方服务配置
+#itzy-micro-service-third:
+#  wechat:
+#    app-id: ${ENV_itzy_MICRO_SERVICE_THIRD_WECHAT_APP_ID:${itzy_MICRO_SERVICE_THIRD_WECHAT_APP_ID}}
+#    secret: ${ENV_itzy_MICRO_SERVICE_THIRD_WECHAT_SECRET:${itzy_MICRO_SERVICE_THIRD_WECHAT_SECRET}}
+#    token: ${ENV_itzy_MICRO_SERVICE_THIRD_WECHAT_TOKEN:${itzy_MICRO_SERVICE_THIRD_WECHAT_TOKEN}}
+#    encoding-aes-key: ${ENV_itzy_MICRO_SERVICE_THIRD_WECHAT_ENCODING_AES_KEY:${itzy_MICRO_SERVICE_THIRD_WECHAT_ENCODING_AES_KEY}}
+#  qywechat:
+#    corp-id: ${ENV_itzy_MICRO_SERVICE_THIRD_QYWECHAT_CORP_ID:${itzy_MICRO_SERVICE_THIRD_QYWECHAT_CORP_ID}}
+#    agent-id: ${ENV_itzy_MICRO_SERVICE_THIRD_QYWECHAT_AGENT_ID:${itzy_MICRO_SERVICE_THIRD_QYWECHAT_AGENT_ID}}
+#    corp-secret: ${ENV_itzy_MICRO_SERVICE_THIRD_QYWECHAT_CORP_SECRET:${itzy_MICRO_SERVICE_THIRD_QYWECHAT_CORP_SECRET}}
+#    token: ${ENV_itzy_MICRO_SERVICE_THIRD_QYWECHAT_TOKEN:${itzy_MICRO_SERVICE_THIRD_QYWECHAT_TOKEN}}
+#    encoding-aes-key: ${ENV_itzy_MICRO_SERVICE_THIRD_QYWECHAT_ENCODING_AES_KEY:${itzy_MICRO_SERVICE_THIRD_QYWECHAT_ENCODING_AES_KEY}}
+#  qywechatmail:
+#    corp-id: ${ENV_itzy_MICRO_SERVICE_THIRD_QYWECHATMAIL_CORP_ID:${itzy_MICRO_SERVICE_THIRD_QYWECHATMAIL_CORP_ID}}
+#    agent-id: ${ENV_itzy_MICRO_SERVICE_THIRD_QYWECHATMAIL_AGENT_ID:${itzy_MICRO_SERVICE_THIRD_QYWECHATMAIL_AGENT_ID}}
+#    corp-secret: ${ENV_itzy_MICRO_SERVICE_THIRD_QYWECHATMAIL_CORP_SECRET:${itzy_MICRO_SERVICE_THIRD_QYWECHATMAIL_CORP_SECRET}}
+#    token: ${ENV_itzy_MICRO_SERVICE_THIRD_QYWECHATMAIL_TOKEN:${itzy_MICRO_SERVICE_THIRD_QYWECHATMAIL_TOKEN}}
+#    encoding-aes-key: ${ENV_itzy_MICRO_SERVICE_THIRD_QYWECHATMAIL_ENCODING_AES_KEY:${itzy_MICRO_SERVICE_THIRD_QYWECHATMAIL_ENCODING_AES_KEY}}
+#  alipay:
+#    app-id: ${ENV_itzy_MICRO_SERVICE_THIRD_ALIPAY_APP_ID:${itzy_MICRO_SERVICE_THIRD_ALIPAY_APP_ID}}
+#    private-key: ${ENV_itzy_MICRO_SERVICE_THIRD_ALIPAY_PRIVATE_KEY:${itzy_MICRO_SERVICE_THIRD_ALIPAY_PRIVATE_KEY}}
+#    ali_public-key: ${ENV_itzy_MICRO_SERVICE_THIRD_ALIPAY_ALIPAY_PUBLIC_KEY:${itzy_MICRO_SERVICE_THIRD_ALIPAY_ALIPAY_PUBLIC_KEY}}
+#    alipayUrl: ${ENV_itzy_MICRO_SERVICE_THIRD_ALIPAY_ALIPAY_URL:${itzy_MICRO_SERVICE_THIRD_ALIPAY_ALIPAY_URL}}
+#    callbackUri: ${ENV_itzy_MICRO_SERVICE_THIRD_ALIPAY_CALLBACK_URL:${itzy_MICRO_SERVICE_THIRD_ALIPAY_CALLBACK_URL}}
+#    scop: ${ENV_itzy_MICRO_SERVICE_THIRD_ALIPAY_SCOP:${itzy_MICRO_SERVICE_THIRD_ALIPAY_SCOP}}
+# 微服务公共配置
+itzy-micro-service-common:
+  web-mvc-configurer:
+    enabled: true
+  redis:
+    fast-json-serializer: ${itzy_MICRO_SERVICE_COMMON_REDIS_FAST_JSON_SERIALIZER:true}
+  feign:
+    debug: ${itzy_MICRO_SERVICE_COMMON_FEIGN_DEBUG:false}
+    proxy:
+      enabled: ${itzy_MICRO_SERVICE_COMMON_FEIGN_PROXY_ENABLED:true}
+      header: ${itzy_MICRO_SERVICE_COMMON_FEIGN_PROXY_HEADER:Cookie,Authorization}
+  session:
+    create:
+      policy: ${itzy_MICRO_SERVICE_COMMON_SESSION_CREATION_POLICY:STATELESS}
+  message:
+    no-login: "用户未登录!"
+    no-permission: "您没有权限访问此接口!"
+  open:
+    url: 'https://test.open.itzy.com/api'
+  tokenmanager:
+    url: 'https://api.itzy.com/common-tokenmanager-service'
+  oauth:
+    url: 'https://test-oauth.cloud.itzy.com'
+    #旧版oauth
+    loginPage: '/login.html'
+    #新版oauth
+    loginPages: '/logins.html'
+  logging:
+    routing-key: ${itzy_MICRO_SERVICE_COMMON_LOGGING_ROUTING_KEY:logs}
+
+# 默认端口配置
+server.port: ${ENV_PORT:${PORT:0}}
+
+# 注册中心地址
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_CLIENT_SERVICEURL_DEFAULTZONE:http://${itzy-micro-service.hosts.eureka-service}:${itzy-micro-service.ports.eureka-service}/eureka/}
+    # 每15秒刷新一次注册中心
+    eureka-service-url-poll-interval-seconds: ${EUREKA_SERVICE_URL_POLL_INTERVAL_SECONDS:300}
+  instance:
+    prefer-ip-address: true
+# Ribbon相关配置
+ribbon:
+  ReadTimeout: ${RIBBON_READTIMEOUT:30000}
+  SocketTimeout: ${RIBBON_SOCKETTIMEOUT:30000}
+  ConnectTimeout: ${RIBBON_CONNECTTIMEOUT:5000}
+  # 关闭httpClient
+  http:
+    client:
+      enabled: ${RIBBON_HTTPCLIENT_ENABLED:false}
+  # 启用okhttp
+  # org.springframework.cloud.netflix.ribbon.okhttp.OkHttpRibbonConfiguration
+  # org.springframework.cloud.netflix.ribbon.okhttp.OkHttpLoadBalancingClient
+  okhttp:
+    enabled: ${RIBBON_OKHTTP_ENABLED:true}
+# Feign相关配置
+feign:
+  # 关闭httpClient
+  httpclient:
+    enabled: ${FEIGN_HTTPCLIENT_ENABLED:false}
+  # 启用okhttp
+  # org.springframework.cloud.netflix.feign.ribbon.OkHttpFeignLoadBalancedConfiguration
+  okhttp:
+    enabled: ${FEIGN_OKHTTP_ENABLED:true}
+  # 启用 hystrix
+  hystrix:
+    enabled: ${FEIGN_HYSTRIX_ENABLED:false}
+# 管理端点
+management:
+  endpoints:
+    web:
+      exposure:
+        # 开启所有端点
+        include:
+          - "*"
+  endpoint:
+    shutdown:
+      # 开启 Shutdown 端点
+      enabled: true
+  info:
+    git:
+      # 显示完整的GIT信息
+      mode: FULL
+# 通用的应用配置
+spring:
+  session:
+    store-type: ${SPRING_SESSION_STORE_TYPE:none}
+  servlet:
+    # 上传大小配置
+    multipart:
+      max-file-size: 30MB
+      max-request-size: 30MB
+  # Http请求相关配置
+  http:
+    # 编码配置
+    encoding:
+      force: true
+      charset: UTF-8
+  # 默认的数据库配置
+  datasource:
+    name: ${ENV_DB_NAME:${DB_NAME:sys}}
+    host: ${ENV_DB_HOST:${DB_HOST:${itzy-micro-service.local}}}
+    #type: org.apache.tomcat.jdbc.pool.DataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: ${ENV_DB_URL:${DB_URL:jdbc:mysql://${spring.datasource.host}/${spring.datasource.name}?serverTimezone=Asia%2FShanghai&characterEncoding=utf8&allowMultiQueries=true&useSSL=false}}
+    second-url: ${ENV_DB_URL:${DB_URL:jdbc:mysql://${spring.datasource.host}/${spring.datasource.second.name}?serverTimezone=Asia%2FShanghai&characterEncoding=utf8&allowMultiQueries=true&useSSL=false}}
+    username: ${ENV_DB_USER:${DB_USER:root}}
+    password: ${ENV_DB_PASS:${DB_PASS:root}}
+    hikari:
+      minimum-idle: 20
+      maximum-pool-size: 500
+  data:
+    # 默认的Mongodb服务器
+    mongodb:
+      database: ${ENV_MONGODB_NAME:${MONGODB_NAME:test}}
+      host: ${ENV_MONGODB_HOST:${MONGODB_HOST:${itzy-micro-service.local}}}
+      port: ${ENV_MONGODB_PORT:${MONGODB_PORT:27017}}
+  # 默认的Redis服务器 存储公共信息
+  redis:
+    database: ${ENV_REDIS_DB:${REDIS_DB:0}}
+    host: ${ENV_REDIS_HOST:${REDIS_HOST:${itzy-micro-service.local}}}
+    port: ${ENV_REDIS_PORT:${REDIS_PORT:6379}}
+    # 默认的RabbitMQ服务器
+  rabbitmq:
+    host: ${ENV_RABBITMQ_HOST:${RABBITMQ_HOST:${itzy-micro-service.local}}}
+    port: ${ENV_RABBITMQ_PORT:${RABBITMQ_PORT:5672}}
+    username: ${ENV_RABBITMQ_USER:${RABBITMQ_USER:guest}}
+    password: ${ENV_RABBITMQ_PASS:${RABBITMQ_PASS:guest}}
+    listener:
+      simple:
+        concurrency: ${RABBITMQ_LISTENER_CONCURRENCY:500}
+        max-concurrency: ${RABBITMQ_LISTENER_MAX_CONCURRENCY:1000}
+        acknowledge-mode: ${RABBITMQ_LISTENER_ACKNOWLEDGE_MODE:MANUAL}
+  cloud:
+    stream:
+      default:
+        consumer:
+          concurrency: ${SPRING_CLOUD_STREAM_DEFAULT_CONSUMER_CONCURRENCY:200}
+info:
+  app:
+    name: ${spring.application.name}
+  company:
+    name: itzy
+#logging.config: ${ENV_LOGGING_CONFIG:${LOGGING_CONFIG:classpath:logback-rabbitmq-spring.xml}}
