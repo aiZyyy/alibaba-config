@@ -2,7 +2,7 @@ zy-micro-services:
   # 端口号
   ports:
     # 核心服务
-    api-zuul: 8080
+    api-gateway: 8080
     gateway-service: 8085
     #路由服务
     core-route-service: 8101
@@ -21,43 +21,11 @@ zy-micro-services:
 zy-micro-service:
   local: localhost
   hosts:
-    api-zuul: zuul
+    api-gateway: gateway
   ports:
-    api-zuul: 8080
-  url: ${ZY_MICRO_SERVICE_URL:http://${zy-micro-service.hosts.api-zuul}:${zy-micro-service.ports.api-zuul}}
+    api-gateway: 8080
+  url: ${ZY_MICRO_SERVICE_URL:http://${zy-micro-service.hosts.api-gateway}:${zy-micro-service.ports.api-gateway}}
 
-# 微服务公共配置
-#zy-micro-service-security:
-#  browser:
-#    loginPage: ${zy-micro-service-common.oauth.loginPage}
-#    qyWechatRedirectUri: ${zy-micro-service-common.oauth.url}
-
-# 微服务第三方服务配置
-#zy-micro-service-third:
-#  wechat:
-#    app-id: ${ENV_zy_MICRO_SERVICE_THIRD_WECHAT_APP_ID:${zy_MICRO_SERVICE_THIRD_WECHAT_APP_ID}}
-#    secret: ${ENV_zy_MICRO_SERVICE_THIRD_WECHAT_SECRET:${zy_MICRO_SERVICE_THIRD_WECHAT_SECRET}}
-#    token: ${ENV_zy_MICRO_SERVICE_THIRD_WECHAT_TOKEN:${zy_MICRO_SERVICE_THIRD_WECHAT_TOKEN}}
-#    encoding-aes-key: ${ENV_zy_MICRO_SERVICE_THIRD_WECHAT_ENCODING_AES_KEY:${zy_MICRO_SERVICE_THIRD_WECHAT_ENCODING_AES_KEY}}
-#  qywechat:
-#    corp-id: ${ENV_zy_MICRO_SERVICE_THIRD_QYWECHAT_CORP_ID:${zy_MICRO_SERVICE_THIRD_QYWECHAT_CORP_ID}}
-#    agent-id: ${ENV_zy_MICRO_SERVICE_THIRD_QYWECHAT_AGENT_ID:${zy_MICRO_SERVICE_THIRD_QYWECHAT_AGENT_ID}}
-#    corp-secret: ${ENV_zy_MICRO_SERVICE_THIRD_QYWECHAT_CORP_SECRET:${zy_MICRO_SERVICE_THIRD_QYWECHAT_CORP_SECRET}}
-#    token: ${ENV_zy_MICRO_SERVICE_THIRD_QYWECHAT_TOKEN:${zy_MICRO_SERVICE_THIRD_QYWECHAT_TOKEN}}
-#    encoding-aes-key: ${ENV_zy_MICRO_SERVICE_THIRD_QYWECHAT_ENCODING_AES_KEY:${zy_MICRO_SERVICE_THIRD_QYWECHAT_ENCODING_AES_KEY}}
-#  qywechatmail:
-#    corp-id: ${ENV_zy_MICRO_SERVICE_THIRD_QYWECHATMAIL_CORP_ID:${zy_MICRO_SERVICE_THIRD_QYWECHATMAIL_CORP_ID}}
-#    agent-id: ${ENV_zy_MICRO_SERVICE_THIRD_QYWECHATMAIL_AGENT_ID:${zy_MICRO_SERVICE_THIRD_QYWECHATMAIL_AGENT_ID}}
-#    corp-secret: ${ENV_zy_MICRO_SERVICE_THIRD_QYWECHATMAIL_CORP_SECRET:${zy_MICRO_SERVICE_THIRD_QYWECHATMAIL_CORP_SECRET}}
-#    token: ${ENV_zy_MICRO_SERVICE_THIRD_QYWECHATMAIL_TOKEN:${zy_MICRO_SERVICE_THIRD_QYWECHATMAIL_TOKEN}}
-#    encoding-aes-key: ${ENV_zy_MICRO_SERVICE_THIRD_QYWECHATMAIL_ENCODING_AES_KEY:${zy_MICRO_SERVICE_THIRD_QYWECHATMAIL_ENCODING_AES_KEY}}
-#  alipay:
-#    app-id: ${ENV_zy_MICRO_SERVICE_THIRD_ALIPAY_APP_ID:${zy_MICRO_SERVICE_THIRD_ALIPAY_APP_ID}}
-#    private-key: ${ENV_zy_MICRO_SERVICE_THIRD_ALIPAY_PRIVATE_KEY:${zy_MICRO_SERVICE_THIRD_ALIPAY_PRIVATE_KEY}}
-#    ali_public-key: ${ENV_zy_MICRO_SERVICE_THIRD_ALIPAY_ALIPAY_PUBLIC_KEY:${zy_MICRO_SERVICE_THIRD_ALIPAY_ALIPAY_PUBLIC_KEY}}
-#    alipayUrl: ${ENV_zy_MICRO_SERVICE_THIRD_ALIPAY_ALIPAY_URL:${zy_MICRO_SERVICE_THIRD_ALIPAY_ALIPAY_URL}}
-#    callbackUri: ${ENV_zy_MICRO_SERVICE_THIRD_ALIPAY_CALLBACK_URL:${zy_MICRO_SERVICE_THIRD_ALIPAY_CALLBACK_URL}}
-#    scop: ${ENV_zy_MICRO_SERVICE_THIRD_ALIPAY_SCOP:${zy_MICRO_SERVICE_THIRD_ALIPAY_SCOP}}
 # 微服务公共配置
 zy-micro-service-common:
   web-mvc-configurer:
@@ -100,9 +68,6 @@ ribbon:
   http:
     client:
       enabled: ${RIBBON_HTTPCLIENT_ENABLED:false}
-  # 启用okhttp
-  # org.springframework.cloud.netflix.ribbon.okhttp.OkHttpRibbonConfiguration
-  # org.springframework.cloud.netflix.ribbon.okhttp.OkHttpLoadBalancingClient
   okhttp:
     enabled: ${RIBBON_OKHTTP_ENABLED:true}
 # Feign相关配置
@@ -110,8 +75,6 @@ feign:
   # 关闭httpClient
   httpclient:
     enabled: ${FEIGN_HTTPCLIENT_ENABLED:false}
-  # 启用okhttp
-  # org.springframework.cloud.netflix.feign.ribbon.OkHttpFeignLoadBalancedConfiguration
   okhttp:
     enabled: ${FEIGN_OKHTTP_ENABLED:true}
   # 启用 hystrix
@@ -191,9 +154,6 @@ spring:
     nacos:
       discovery:
         server-addr: ${SPRING_CLOUD_NACOS_URI:http://localhost:8848}
-      config:
-        server-addr: ${SPRING_CLOUD_NACOS_URI:http://localhost:8848}
-        file-extension: yaml
 info:
   app:
     name: ${spring.application.name}
