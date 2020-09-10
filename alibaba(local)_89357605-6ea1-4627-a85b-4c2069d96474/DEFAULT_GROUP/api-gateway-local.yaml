@@ -1,5 +1,5 @@
 server:
-  port: ${zy-micro-services.ports.api-gateway:8080}
+  port: ${zy-micro-services.ports.api-gateway:8999}
 
 spring:
   cloud:

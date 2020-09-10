@@ -1,0 +1,4 @@
+server:
+    port: 9984
+nacos: 
+    share: nacos-config-share
