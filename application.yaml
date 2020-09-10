@@ -3,16 +3,18 @@ zy-micro-services:
   ports:
     # 核心服务
     api-gateway: 8080
-    gateway-service: 8085
     #路由服务
     core-route-service: 8101
     gateway-market-service: 8102
-
+    gateway-service: 8103
+    #kits服务
+    snowflake-service: 8201
     #demo
     springcloud-demo: 9001
   # 数据库
   database:
     core-route-service: core_route
+    snowflake-service: snowflake
 
 ##############################
 # 以下为微服务公用配置 请勿修改
