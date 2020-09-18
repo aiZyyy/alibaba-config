@@ -1,17 +1,15 @@
 # 基础信息
-itzy-micro-service:
+zy-micro-service:
   local: localhost
   hosts:
-    api-gateway: ${itzy-micro-service.local}
-    eureka-service: ${itzy-micro-service.local}
-    config-service: ${itzy-micro-service.local}
+    api-gateway: ${zy-micro-service.local}
 ## MySQL
-#DB_HOST: dev.mysql.i.sixi.com
+#DB_HOST: dev.mysql.i.zy.com
 #DB_PASS: root
 ## Redis
-#REDIS_HOST: dev.redis.i.sixi.com
+#REDIS_HOST: dev.redis.i.zy.com
 #REDIS_DB: 10
 #RabbitMQ
-RABBITMQ_HOST: ${itzy-micro-service.local}
+RABBITMQ_HOST: ${zy-micro-service.local}
 # MongoDB
-#MONGODB_HOST: dev.mongodb.i.sixi.com
+#MONGODB_HOST: dev.mongodb.i.zy.com
