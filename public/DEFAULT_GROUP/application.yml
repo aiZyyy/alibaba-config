@@ -11,6 +11,7 @@ zy-micro-services:
     snowflake-service: 8201
     #demo
     demo-nacos-config-share: 9001
+    demo-client-service: 9002
   # 数据库
   database:
     core-route-service: core_route
