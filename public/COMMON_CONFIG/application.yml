@@ -2,7 +2,9 @@ zy-micro-services:
   # 端口号
   ports:
     # 核心服务
-    api-gateway: 8080
+    api-zuul: 8080
+    discovery-service: 8081
+    config-service: 8082
     #路由服务
     core-route-service: 8101
     gateway-market-service: 8102
@@ -24,10 +26,14 @@ zy-micro-services:
 zy-micro-service:
   local: localhost
   hosts:
-    api-gateway: gateway
+    api-zuul: gateway
+    discovery-service: discovery
+    config-service: config
   ports:
-    api-gateway: 8080
-  url: ${ZY_MICRO_SERVICE_URL:http://${zy-micro-service.hosts.api-gateway}:${zy-micro-service.ports.api-gateway}}
+    api-zuul: 8080
+    discovery-service: 8081
+    config-service: 8082
+  url: ${ZY_MICRO_SERVICE_URL:http://${zy-micro-service.hosts.api-zuul}:${zy-micro-service.ports.api-zuul}}
 
 # 微服务公共配置
 zy-micro-service-common:
