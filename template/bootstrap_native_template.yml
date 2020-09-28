@@ -16,9 +16,11 @@ spring:
         file-extension: yml
         shared-configs:
           - dataId: application.yml
+            group: COMMON_CONFIG
             refresh: true
           - dataId: application-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
             refresh: true
+            group: COMMON_CONFIG
         #extension-configs:
         #- data-id: shareconfig3.yml
         #group: SHARE3_GROUP
